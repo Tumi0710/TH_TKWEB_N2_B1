@@ -1400,7 +1400,7 @@ nav {
 
 .brand-card {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
-    padding: 40px;
+    padding: 20px; /* Padding cho logo thoáng hơn */
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -1409,17 +1409,32 @@ nav {
     transition: all 0.4s;
     cursor: pointer;
     border: 2px solid transparent;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #888;
+    overflow: hidden; /* Cắt ảnh nếu tràn */
+}
+
+/* --- BỔ SUNG: CSS CHO ẢNH LOGO ĐỂ KHÔNG BỊ VỠ --- */
+.brand-card img {
+    max-width: 80%; /* Logo không chiếm hết khung */
+    max-height: 80%;
+    object-fit: contain; /* Giữ nguyên tỉ lệ ảnh */
+    filter: grayscale(100%) brightness(200%); /* Làm trắng đen sáng màu */
+    opacity: 0.6; /* Làm mờ đi một chút */
+    transition: all 0.4s ease;
 }
 
 .brand-card:hover {
     border-color: #ff0000;
     transform: translateY(-8px) scale(1.05);
     box-shadow: 0 20px 50px rgba(255, 0, 0, 0.2);
-    color: #fff;
+    background: #fff; /* Khi di chuột vào thì nền trắng */
 }
+
+.brand-card:hover img {
+    filter: grayscale(0%); /* Trả lại màu gốc của logo */
+    opacity: 1; /* Rõ nét */
+    transform: scale(1.1);
+}
+/* --- KẾT THÚC BỔ SUNG --- */
 
 /* ===================================
    LOCATIONS
@@ -1872,4 +1887,5 @@ footer {
     .hero h1 {
         font-size: 32px;
     }
+    
 }
