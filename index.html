@@ -4,97 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automize - Automotive Parts & Accessories</title>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Styles cho vị trí ảnh */
-        .image-placeholder {
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        /* Product/Flash images */
-        .product-image img,
-        .flash-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Hero background */
-        .hero-bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: 0;
-        }
-        
-        /* Promo card images */
-        .promo-card-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
-            z-index: 0;
-            filter: brightness(0.8);
-        }
-        
-        /* Fix ảnh phanh xe màu đỏ */
-        .promo-card.red .promo-card-image {
-            opacity: 0.6;
-            filter: brightness(0.7) saturate(0.8);
-        }
-        
-        /* Location image */
-        .location-image {
-            height: 500px;
-            background: linear-gradient(135deg, rgba(42, 42, 42, 0.8), rgba(20, 20, 20, 0.9));
-            border-radius: 25px;
-            border: 2px solid rgba(255, 0, 0, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s;
-            overflow: hidden;
-        }
-        
-        .location-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Brand logos */
-        .brand-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .brand-card img {
-            max-width: 80%;
-            max-height: 60px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(0.6);
-            transition: all 0.3s;
-        }
-        
-        .brand-card:hover img {
-            filter: grayscale(0%) brightness(1);
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -166,9 +78,6 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <!-- 🖼️ HERO BACKGROUND IMAGE -->
-        <img src="asset/image/lexus-ls500h-hinh-tong-quan.jpg" alt="Hero Background" class="hero-bg-image">
-        
         <div class="hero-content">
             <div class="hero-tag">SPORT EDITION</div>
             <h1>NEW ARRIVALS<br><span class="highlight">SPORT RIM CAR</span></h1>
@@ -211,7 +120,6 @@
     
         <div class="product-promo">
             <div class="promo-card dark">
-<<<<<<< HEAD
                 <div>
                     <h3 class="yellow">MICHELIN<br>TIRE</h3>
                     <p>Premium Performance</p>
@@ -225,22 +133,6 @@
                     <p>Best Sellers System</p>
                     <button class="promo-btn">Shop Now</button>
                 </div>
-=======
-                <!-- 🖼️ MICHELIN TIRE IMAGE -->
-                <img src="asset/image/michelinlatitudetourhp.png" alt="Michelin Tire" class="promo-card-image">
-                
-                <h3 class="yellow">MICHELIN TIRE</h3>
-                <p>Premium Performance</p>
-                <button class="promo-btn">Shop Now</button>
-            </div>
-            <div class="promo-card dark">
-                <!-- 🖼️ BRAKE SYSTEM IMAGE -->
-                <img src="asset/image/1406_Phanh-a--t-e1612586049854.jpg" alt="Brake System" class="promo-card-image">
-                
-                <h3>BETTER BRAKES</h3>
-                <p>Best Sellers Brakes System</p>
-                <button class="promo-btn">Shop Now</button>
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
             </div>
         </div>
 
@@ -326,21 +218,11 @@
             </div>
             
             <div class="product-grid">
-<<<<<<< HEAD
                 
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
                         <img src="https://sunwayautoparts.com/wp-content/uploads/2021/11/Car-Wheel.jpg" alt="Car Wheel">
-=======
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <button class="wishlist-btn">♡</button>
-                        <!-- 🖼️ ADD PRODUCT IMAGE 1 HERE -->
-                        <img src="asset/image/z7291860410066_273221d0a46a133c51e9eb93b02ad91d.jpg" alt="Brake System" class="promo-card-image">
-
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
@@ -358,22 +240,12 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
         
-=======
-
-                <!-- Product 2 -->
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                 <div class="product-card">
                     <div class="product-image">
                         <div class="product-badge" style="position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; z-index: 2;">-25%</div>
                         <button class="wishlist-btn">♡</button>
-<<<<<<< HEAD
                         <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-2-600x600.jpg" alt="Car Tire">
-=======
-                        <!-- 🖼️ ADD PRODUCT IMAGE 2 HERE -->
-                        <img src="asset/image/tải xuống.jpg" alt="Brake System" class="promo-card-image">
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
@@ -392,21 +264,11 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
         
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
                         <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/1-32-600x600.jpg" alt="Brake Caliper">
-=======
-
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <button class="wishlist-btn">♡</button>
-                        <!-- 🖼️ ADD PRODUCT IMAGE 3 HERE -->
-                        <img src="asset/image/tải xuống (1).jpg" alt="Brake System" class="promo-card-image">
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
@@ -424,21 +286,11 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
         
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
                         <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-26-600x600.jpg" alt="Steering Wheel">
-=======
-
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <button class="wishlist-btn">♡</button>
-                        <!-- 🖼️ ADD PRODUCT IMAGE 4 HERE -->
-                        <img src="asset/image/tải xuống (2).jpg" alt="Brake System" class="promo-card-image">
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
@@ -468,21 +320,12 @@
         </div>
         
         <div class="flash-sale-grid">
-<<<<<<< HEAD
             
             <div class="flash-card border-green">
                 <div class="flash-badge" style="background: #66cc33;">NEW</div>
                 
                 <div class="flash-image">
                     <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-22.jpg" alt="Flash Sale Tire">
-=======
-            <!-- Flash Sale Product 1 -->
-            <div class="flash-card new">
-                <div class="flash-badge">NEW</div>
-                <div class="flash-image">
-                    <!-- 🖼️ ADD FLASH SALE IMAGE 1 HERE -->
-                    <div class="image-placeholder" style="width: 100%; height: 300px;">FLASH SALE 1<br>500x300px</div>
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                 </div>
                 
                 <div class="flash-content">
@@ -516,20 +359,11 @@
                     <div class="stock-info">53% SOLD - AVAILABLE: 7</div>
                 </div>
             </div>
-<<<<<<< HEAD
     
             <div class="flash-card border-yellow">
                 
                 <div class="flash-image">
                     <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-19.jpg" alt="Flash Sale Rim">
-=======
-
-            <!-- Flash Sale Product 2 -->
-            <div class="flash-card">
-                <div class="flash-image">
-                    <!-- 🖼️ ADD FLASH SALE IMAGE 2 HERE -->
-                    <div class="image-placeholder" style="width: 100%; height: 300px;">FLASH SALE 2<br>500x300px</div>
->>>>>>> bccfe8fdeb8add7b0ebb828db8a3c01cc1d6c97f
                 </div>
                 
                 <div class="flash-content">
@@ -570,44 +404,18 @@
             <h2>OUR PARTNERS</h2>
         </div>
         <div class="brands-grid">
-            <!-- 🖼️ ADD BRAND LOGOS HERE (12 logos) -->
-            
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 1<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 2<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 3<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 4<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 5<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 6<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 7<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 8<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 9<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 10<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 11<br>200x100px</div>
-            </div>
-            <div class="brand-card">
-                <div class="image-placeholder" style="width: 100%; height: 80px;">LOGO 12<br>200x100px</div>
-            </div>
+            <div class="brand-card">CORPORATE</div>
+            <div class="brand-card">CAR LOGO</div>
+            <div class="brand-card">AUTO FAST</div>
+            <div class="brand-card">BENTLEY</div>
+            <div class="brand-card">JAGUAR</div>
+            <div class="brand-card">PRINCESS AUTO</div>
+            <div class="brand-card">REDCAR</div>
+            <div class="brand-card">MINI</div>
+            <div class="brand-card">TABCCART</div>
+            <div class="brand-card">HONDA</div>
+            <div class="brand-card">JEEP</div>
+            <div class="brand-card">THACO BUS</div>
         </div>
     </section>
 
@@ -619,10 +427,7 @@
                 <h2>Car Washing and Care Points</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
             </div>
-            <div class="location-image">
-                <!-- 🖼️ ADD LOCATION IMAGE HERE -->
-                <div class="image-placeholder" style="width: 100%; height: 100%;">LOCATION IMAGE<br>800x500px</div>
-            </div>
+            <div class="location-image"></div>
         </div>
     </section>
 

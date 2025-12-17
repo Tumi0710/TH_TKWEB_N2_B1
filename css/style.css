@@ -1369,7 +1369,7 @@ nav {
     .flash-sale-grid { grid-template-columns: 1fr; } /* Về 1 cột dọc */
     .flash-card { flex-direction: column; text-align: center; } /* Ảnh trên chữ dưới */
     .flash-prices, .countdown { justify-content: center; }
-}
+} 
 /* ===================================
    BRANDS
    =================================== */
