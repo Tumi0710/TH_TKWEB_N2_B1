@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Automize Automotive Parts</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo"><a href="index.html" style="color: #fff; text-decoration: none;">AUTOMIZE</a></div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="ENTER YOUR KEYWORD">
+                <button>🔍</button>
+            </div>
+            
+            <div class="header-icons">
+                <div class="icon-btn">
+                    Account<br><small>Hello, Login</small>
+                </div>
+                <div class="icon-btn">
+                    ❤️
+                    <span class="badge">0</span>
+                </div>
+                <div class="icon-btn">
+                    🛒
+                    <span class="badge">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+    <ul class="nav-menu">
+        <li><a href="index.html">HOME</a></li>
+        <li class="active dropdown">
+            <a href="shop.html">SHOP</a>
+            <div class="dropdown-content">
+                <a href="#" data-filter="all">
+                    All Products
+                </a>
+                <a href="#" data-filter="new">
+                    New Arrivals
+                </a>
+                <a href="#" data-filter="bestseller">
+                    Best Sellers
+                </a>
+                <a href="#" data-filter="sale">
+                    Sale Items
+                </a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="#product">PRODUCT</a>
+            <div class="dropdown-content">
+                <a href="#" data-category="tires">Tires & Wheels</a>
+                <a href="#" data-category="brakes">Brakes System</a>
+                <a href="#" data-category="suspension">Suspension</a>
+                <a href="#" data-category="audio">Audio System</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>SHOP</h1>
+            <div class="breadcrumb">
+                <a href="index.html">HOME</a> / <span>SHOP</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="shop-container">
+            
+            <!-- Sidebar -->
+            <aside class="shop-sidebar">
+                
+                <!-- Categories Filter -->
+                <div class="filter-widget">
+                    <h3>CATEGORIES</h3>
+                    <ul class="category-list">
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="all" checked>
+                                <span>All Products</span>
+                                <span class="count">(48)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="tires">
+                                <span>Tires & Wheels</span>
+                                <span class="count">(12)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="brakes">
+                                <span>Brakes System</span>
+                                <span class="count">(8)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="suspension">
+                                <span>Suspension</span>
+                                <span class="count">(10)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="audio">
+                                <span>Audio System</span>
+                                <span class="count">(6)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="headlight">
+                                <span>Headlight</span>
+                                <span class="count">(7)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-category="rims">
+                                <span>Automotive Rims</span>
+                                <span class="count">(5)</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-widget">
+                    <h3>PRICE RANGE</h3>
+                    <div class="price-range">
+                        <input type="range" id="priceRange" min="0" max="500" value="500">
+                        <div class="price-values">
+                            <span>$0</span>
+                            <span id="maxPrice">$500</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brands Filter -->
+                <div class="filter-widget">
+                    <h3>BRANDS</h3>
+                    <ul class="brand-list">
+                        <li>
+                            <label>
+                                <input type="checkbox" data-brand="michelin">
+                                <span>Michelin</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-brand="goodyear">
+                                <span>Goodyear</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-brand="continental">
+                                <span>Continental</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-brand="bridgestone">
+                                <span>Bridgestone</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-brand="pirelli">
+                                <span>Pirelli</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-widget">
+                    <h3>RATING</h3>
+                    <ul class="rating-list">
+                        <li>
+                            <label>
+                                <input type="checkbox" data-rating="5">
+                                <span class="stars">★★★★★</span>
+                                <span class="count">(12)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-rating="4">
+                                <span class="stars">★★★★☆</span>
+                                <span class="count">(20)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-rating="3">
+                                <span class="stars">★★★☆☆</span>
+                                <span class="count">(10)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-rating="2">
+                                <span class="stars">★★☆☆☆</span>
+                                <span class="count">(4)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" data-rating="1">
+                                <span class="stars">★☆☆☆☆</span>
+                                <span class="count">(2)</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Reset Filters -->
+                <button class="reset-filters">RESET FILTERS</button>
+
+            </aside>
+
+            <!-- Main Content -->
+            <div class="shop-main">
+                
+                <!-- Toolbar -->
+                <div class="shop-toolbar">
+                    <div class="toolbar-left">
+                        <span class="result-count">Showing <strong>1-12</strong> of <strong>48</strong> results</span>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="view-mode">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        <select class="sort-select">
+                            <option value="default">Default Sorting</option>
+                            <option value="popularity">Sort by Popularity</option>
+                            <option value="rating">Sort by Rating</option>
+                            <option value="date">Sort by Latest</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid">
+                    
+                    <!-- Product 1 -->
+                    <div class="product-card" data-category="tires" data-price="133">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://sunwayautoparts.com/wp-content/uploads/2021/11/Car-Wheel.jpg" alt="Car Wheel">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">TIRES & WHEELS</div>
+                            <h3 class="product-title">Premium Sport Wheel 18 inch Alloy Rim</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(5)</span></div>
+                            <div class="product-price">$133.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card" data-category="tires" data-price="90">
+                        <div class="product-image">
+                            <div class="product-badge sale">-25%</div>
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-2-600x600.jpg" alt="Car Tire">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">TIRES & WHEELS</div>
+                            <h3 class="product-title">Dorman Steel Wheel Compatible with Select Honda Models</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(4)</span></div>
+                            <div class="product-price">
+                                $90.00 <span class="old-price">$120.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card" data-category="brakes" data-price="19">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/1-32-600x600.jpg" alt="Brake Caliper">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">BRAKES SYSTEM</div>
+                            <h3 class="product-title">High Performance Brake Caliper Set</h3>
+                            <div class="product-rating">★★★★☆ <span style="color:#999">(3)</span></div>
+                            <div class="product-price">$19.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card" data-category="suspension" data-price="33">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-26-600x600.jpg" alt="Steering Wheel">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">SUSPENSION</div>
+                            <h3 class="product-title">Premium Steering Wheel Carbon Fiber</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(8)</span></div>
+                            <div class="product-price">$33.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="product-card" data-category="audio" data-price="245">
+                        <div class="product-image">
+                            <div class="product-badge new">NEW</div>
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-22.jpg" alt="Audio System">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">AUDIO SYSTEM</div>
+                            <h3 class="product-title">Premium Car Audio System with Subwoofer</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(12)</span></div>
+                            <div class="product-price">$245.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="product-card" data-category="headlight" data-price="89">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-2-600x600.jpg" alt="Headlight">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">HEADLIGHT</div>
+                            <h3 class="product-title">LED Projector Headlight Assembly</h3>
+                            <div class="product-rating">★★★★☆ <span style="color:#999">(6)</span></div>
+                            <div class="product-price">$89.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 7 -->
+                    <div class="product-card" data-category="rims" data-price="320">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-19.jpg" alt="Automotive Rim">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">AUTOMOTIVE RIMS</div>
+                            <h3 class="product-title">20 Inch Chrome Finish Alloy Wheel Set</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(10)</span></div>
+                            <div class="product-price">$320.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 8 -->
+                    <div class="product-card" data-category="brakes" data-price="156">
+                        <div class="product-image">
+                            <div class="product-badge sale">-15%</div>
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/1-32-600x600.jpg" alt="Brake Pads">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">BRAKES SYSTEM</div>
+                            <h3 class="product-title">Ceramic Brake Pads Performance Set</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(15)</span></div>
+                            <div class="product-price">
+                                $156.00 <span class="old-price">$184.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 9-12: Duplicate for demo -->
+                    <div class="product-card" data-category="suspension" data-price="210">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://sunwayautoparts.com/wp-content/uploads/2021/11/Car-Wheel.jpg" alt="Coilover">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">SUSPENSION</div>
+                            <h3 class="product-title">Adjustable Coilover Suspension Kit</h3>
+                            <div class="product-rating">★★★★☆ <span style="color:#999">(7)</span></div>
+                            <div class="product-price">$210.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="audio" data-price="178">
+                        <div class="product-image">
+                            <div class="product-badge new">NEW</div>
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-22.jpg" alt="Speaker">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">AUDIO SYSTEM</div>
+                            <h3 class="product-title">6.5 Inch Component Speaker System</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(9)</span></div>
+                            <div class="product-price">$178.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="tires" data-price="425">
+                        <div class="product-image">
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-2-600x600.jpg" alt="Tire Set">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">TIRES & WHEELS</div>
+                            <h3 class="product-title">All-Season Performance Tire Set (4)</h3>
+                            <div class="product-rating">★★★★★ <span style="color:#999">(20)</span></div>
+                            <div class="product-price">$425.00</div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="headlight" data-price="135">
+                        <div class="product-image">
+                            <div class="product-badge sale">-20%</div>
+                            <button class="wishlist-btn">♡</button>
+                            <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-19.jpg" alt="Fog Light">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">HEADLIGHT</div>
+                            <h3 class="product-title">LED Fog Light with DRL Function</h3>
+                            <div class="product-rating">★★★★☆ <span style="color:#999">(11)</span></div>
+                            <div class="product-price">
+                                $135.00 <span class="old-price">$169.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-cart">ADD TO CART</button>
+                                <button class="btn-icon" title="Compare">📊</button>
+                                <button class="btn-icon" title="View">👁</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn" disabled>← PREV</button>
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <button class="page-number">4</button>
+                    <button class="page-btn">NEXT →</button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>AUTOMIZE</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
+                <div class="social-links">
+                    <a href="#">f</a>
+                    <a href="#">t</a>
+                    <a href="#">in</a>
+                    <a href="#">y</a>
+                    <a href="#">i</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Career</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Help & Support</h4>
+                <ul>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p style="color: #aaa; margin-bottom: 15px; font-size: 14px;">Subscribe to get special offers and updates</p>
+                <div class="newsletter">
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>© 2025 Automize. All Rights Reserved.</div>
+            <div class="payment-methods">
+                <span>💳 Visa</span>
+                <span>💳 Mastercard</span>
+                <span>💳 PayPal</span>
+                <span>💳 Amex</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html>

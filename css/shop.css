@@ -1,0 +1,592 @@
+/* ==========================================================================
+   AUTOMIZE SHOP CSS - FIXED & OPTIMIZED
+   ========================================================================== */
+
+/* Page Header */
+.page-header {
+    margin-top: 120px;
+    height: 300px;
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: 0 0, 40px 40px;
+    animation: particles 20s linear infinite;
+}
+
+.page-header-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    color: #fff;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+
+.breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #ff0000;
+}
+
+.breadcrumb span {
+    color: #ff0000;
+}
+
+/* Shop Section */
+.shop-section {
+    padding: 80px 20px;
+    background: #050505;
+}
+
+.shop-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+}
+
+/* Sidebar */
+.shop-sidebar {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+    padding: 30px;
+    border-radius: 20px;
+    height: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 140px;
+}
+
+.filter-widget {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.filter-widget:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.filter-widget h3 {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    color: #ff0000;
+}
+
+/* Category List */
+.category-list,
+.brand-list,
+.rating-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-list li,
+.brand-list li,
+.rating-list li {
+    margin-bottom: 12px;
+}
+
+.category-list label,
+.brand-list label,
+.rating-list label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 8px 0;
+    color: #bbb;
+}
+
+.category-list label:hover,
+.brand-list label:hover,
+.rating-list label:hover {
+    color: #ff0000;
+    padding-left: 5px;
+}
+
+.category-list input,
+.brand-list input,
+.rating-list input {
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #ff0000;
+}
+
+.count {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Price Range */
+.price-range {
+    padding: 10px 0;
+}
+
+#priceRange {
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #ff0000, #ff6666);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+#priceRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border: 3px solid #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 0, 0, 0.5);
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Rating Stars */
+.stars {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+/* Reset Filters Button */
+.reset-filters {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.reset-filters:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.5);
+}
+
+/* Shop Main */
+.shop-main {
+    width: 100%;
+}
+
+/* Toolbar */
+.shop-toolbar {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+    padding: 20px 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-count {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.result-count strong {
+    color: #ff0000;
+}
+
+.toolbar-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.view-mode {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-btn:hover,
+.view-btn.active {
+    background: #ff0000;
+    border-color: #ff0000;
+    color: #fff;
+}
+
+.sort-select {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.sort-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+/* Product Card Fixes */
+.product-card {
+    transition: all 0.4s ease;
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.product-badge.sale {
+    background: #ff0000;
+    color: #fff;
+}
+
+.product-badge.new {
+    background: #00ff00;
+    color: #000;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* List View */
+.products-grid.list-view {
+    grid-template-columns: 1fr;
+}
+
+.products-grid.list-view .product-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.products-grid.list-view .product-image {
+    height: 250px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-btn,
+.page-number {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.page-btn:hover:not(:disabled),
+.page-number:hover,
+.page-number.active {
+    background: #ff0000;
+    border-color: #ff0000;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .shop-container {
+        grid-template-columns: 1fr;
+    }
+    .shop-sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =================================================================
+   🔥 FIXED DROPDOWN MENU - AUTOMIZE STYLE (FIXED BUG VỆT MÀU)
+   ================================================================= */
+
+.dropdown {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown > a::after {
+    content: '▼';
+    font-size: 8px;
+    margin-left: 6px;
+    position: relative;
+    top: -1px;
+    transition: transform 0.3s;
+    opacity: 0.7;
+    display: inline-block;
+}
+
+.dropdown:hover > a::after {
+    transform: rotate(180deg);
+    color: #ff0000;
+}
+
+/* Lớp cầu nối */
+.dropdown::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    z-index: 999;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 260px;
+    margin-top: 15px;
+    
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #ff0000; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+    border-radius: 0 0 8px 8px;
+    z-index: 1000;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- FIX LỖI VỆT MÀU QUAN TRỌNG --- */
+/* Ẩn triệt để các phần tử rác */
+.dropdown-content a * {
+    display: none !important;
+}
+
+/* Style cho Link - Đã sửa lỗi vệt kẻ */
+.dropdown-content a {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between; /* Đẩy nội dung sang 2 bên */
+    padding: 14px 25px;
+    color: #bbb;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent !important;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+/* Hiệu ứng Hover sạch sẽ */
+.dropdown-content a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03) !important;
+    padding-left: 30px;
+}
+
+/* Thanh đỏ neon bên trái khi hover */
+.dropdown-content a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #ff0000;
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.dropdown-content a:hover::before {
+    transform: scaleY(1);
+}
+
+/* --- BADGE (NHÃN) ĐÃ FIX --- */
+/* Badge NEW - Fix lỗi vệt xanh */
+.dropdown-content a[data-filter="new"]::after {
+    content: 'NEW';
+    background: #00ff00;
+    color: #000;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+    line-height: normal;
+    
+    /* Ngăn chặn việc bị kéo dãn */
+    display: inline-block; 
+    width: auto; 
+    height: auto;
+    flex-shrink: 0;
+    margin-left: 10px;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Badge SALE - Fix lỗi vệt đỏ */
+.dropdown-content a[data-filter="sale"]::after {
+    content: 'SALE';
+    background: #ff0000;
+    color: #fff;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+    line-height: normal;
+    
+    display: inline-block;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    margin-left: 10px;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* Mũi tên cho các mục thường */
+.dropdown-content a:not([data-filter="new"]):not([data-filter="sale"])::after {
+    content: '→';
+    font-size: 12px;
+    color: #ff0000;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.dropdown-content a:not([data-filter="new"]):not([data-filter="sale"]):hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dropdown-content {
+        min-width: 220px;
+    }
+}
