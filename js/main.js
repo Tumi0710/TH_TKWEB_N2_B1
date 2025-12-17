@@ -1,6 +1,6 @@
 /**
  * AUTOMIZE - Main JavaScript File
- * Phiên bản "Bulletproof": Chống lỗi cache, chống xung đột data
+ * Tính năng: Giỏ hàng, Auth, Search (Nâng cao), Menu
  */
 
 (function($) {
@@ -9,9 +9,10 @@
     $(document).ready(function() {
         console.log("System Ready.");
 
-        // 1. Chạy Cart & Auth trước
+        // 1. Chạy các hệ thống chính
         initCartSystem(); 
         initAuthSystem();
+        initSearchSystem(); // <--- MỚI: Hệ thống tìm kiếm nâng cao
         
         // 2. Chạy các UI functions
         initMobileMenu();
@@ -20,11 +21,101 @@
         initWishlist();
         initScrollEffects();
         initNewsletterForm();
-        initSearchBar();
+        
+        // Kiểm tra nếu có tham số tìm kiếm trên URL (khi chuyển từ Home sang Shop)
+        checkUrlSearchParam();
     });
 
     /* ==================================================================
-       1. HỆ THỐNG GIỎ HÀNG (AN TOÀN CAO)
+       1. HỆ THỐNG TÌM KIẾM (SEARCH SYSTEM) - MỚI
+       ================================================================== */
+    function initSearchSystem() {
+        // Bắt sự kiện click nút kính lúp
+        $(document).on('click', '.search-bar button', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+
+        // Bắt sự kiện nhấn Enter trong ô input
+        $(document).on('keypress', '.search-bar input', function(e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                performSearch();
+            }
+        });
+    }
+
+    // Hàm thực hiện tìm kiếm
+    function performSearch() {
+        var keyword = $('.search-bar input').val().trim().toLowerCase();
+
+        if (keyword.length === 0) {
+            showNotification('Vui lòng nhập từ khóa!', 'error');
+            return;
+        }
+
+        // Kiểm tra xem đang ở trang nào
+        // Nếu ĐANG ở trang shop.html (hoặc có lưới sản phẩm .products-grid)
+        if ($('.products-grid').length > 0) {
+            filterProductsByKeyword(keyword);
+        } 
+        // Nếu KHÔNG phải trang shop (ví dụ đang ở Home), chuyển hướng sang shop
+        else {
+            // Chuyển hướng và kèm theo từ khóa trên URL
+            window.location.href = 'shop.html?search=' + encodeURIComponent(keyword);
+        }
+    }
+
+    // Hàm lọc sản phẩm trên trang Shop
+    function filterProductsByKeyword(keyword) {
+        var $products = $('.product-card');
+        var count = 0;
+
+        $products.each(function() {
+            var title = $(this).find('.product-title').text().toLowerCase();
+            
+            // Nếu tên sản phẩm chứa từ khóa
+            if (title.includes(keyword)) {
+                $(this).fadeIn(300);
+                count++;
+            } else {
+                $(this).fadeOut(300);
+            }
+        });
+
+        // Cuộn xuống phần kết quả
+        $('html, body').animate({
+            scrollTop: $('.shop-section').offset().top - 100
+        }, 500);
+
+        // Hiển thị thông báo kết quả
+        if (count > 0) {
+            showNotification(`Tìm thấy ${count} sản phẩm cho "${keyword}"`);
+            $('.result-count').html(`Found <strong>${count}</strong> results for "<strong>${keyword}</strong>"`);
+        } else {
+            showNotification(`Không tìm thấy sản phẩm nào!`, 'error');
+            $('.result-count').html(`No results found for "<strong>${keyword}</strong>"`);
+        }
+    }
+
+    // Hàm kiểm tra URL khi mới vào trang (Dành cho việc chuyển từ Home -> Shop)
+    function checkUrlSearchParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchKeyword = urlParams.get('search');
+
+        if (searchKeyword && $('.products-grid').length > 0) {
+            // Điền lại từ khóa vào ô tìm kiếm
+            $('.search-bar input').val(searchKeyword);
+            
+            // Đợi 1 chút cho trang load xong rồi lọc
+            setTimeout(function() {
+                filterProductsByKeyword(searchKeyword.toLowerCase());
+            }, 500);
+        }
+    }
+
+    /* ==================================================================
+       2. HỆ THỐNG GIỎ HÀNG (AN TOÀN)
        ================================================================== */
     function initCartSystem() {
         const $cartSidebar = $('.cart-sidebar');
@@ -34,63 +125,47 @@
         const $cartTotalCountEl = $('#cart-total-count');
         const $badgeEl = $('.header-icons .icon-btn').eq(2).find('.badge');
 
-        // --- CƠ CHẾ AN TOÀN (TRY-CATCH) ---
-        // Nếu data cũ bị lỗi, tự động reset để web không bị đơ
         let cart = [];
         try {
             const storedCart = localStorage.getItem('automize_cart');
-            if (storedCart) {
-                cart = JSON.parse(storedCart);
-                if (!Array.isArray(cart)) throw new Error("Data corrupted");
-            }
+            if (storedCart) cart = JSON.parse(storedCart);
         } catch (e) {
-            console.warn("Giỏ hàng bị lỗi data cũ, đang reset...", e);
             localStorage.removeItem('automize_cart');
             cart = [];
         }
         
-        // Vẽ lại giao diện ngay khi load
         updateCartUI();
 
-        // 1. Mở giỏ hàng
         $(document).on('click', '#header-cart-btn', function(e) {
             e.preventDefault();
             $cartSidebar.addClass('open');
             $cartOverlay.fadeIn(300);
         });
 
-        // 2. Đóng giỏ hàng
         $(document).on('click', '.close-cart, .cart-overlay', function() {
             $cartSidebar.removeClass('open');
             $cartOverlay.fadeOut(300);
         });
 
-        // 3. Xử lý ADD TO CART (Bắt sự kiện toàn cục)
         $(document).on('click', '.add-to-cart, .btn-cart', function(e) {
             e.preventDefault();
-            e.stopPropagation(); // Chặn xung đột
+            e.stopPropagation();
             
             var $btn = $(this);
             var $card = $btn.closest('.product-card, .flash-card');
 
             if ($card.length === 0) return;
 
-            // Lấy dữ liệu an toàn
             var title = $card.find('.product-title, .flash-title').text().trim();
-            
-            // Xử lý giá tiền: Chỉ lấy số
             var priceText = $card.find('.price-current, .flash-price').clone().children().remove().end().text();
             var price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            if(isNaN(price)) price = 0; // Giá mặc định nếu lỗi
-
+            if(isNaN(price)) price = 0;
             var image = $card.find('img').attr('src');
 
-            // Hiệu ứng nút
             var originalText = $btn.text();
             $btn.text('Adding...');
             $btn.prop('disabled', true);
 
-            // Thêm vào mảng
             var existingItem = cart.find(item => item.title === title);
             if (existingItem) {
                 existingItem.quantity++;
@@ -98,23 +173,19 @@
                 cart.push({ title, price, image, quantity: 1 });
             }
 
-            // Lưu và vẽ lại
             saveCart();
             updateCartUI();
             
-            // Hiện Sidebar
             $cartSidebar.addClass('open');
             $cartOverlay.fadeIn(300);
             showNotification('Đã thêm vào giỏ hàng!');
 
-            // Trả lại nút
             setTimeout(function() {
                 $btn.text(originalText);
                 $btn.prop('disabled', false);
             }, 500);
         });
 
-        // --- CÁC HÀM CON ---
         function saveCart() {
             localStorage.setItem('automize_cart', JSON.stringify(cart));
         }
@@ -162,44 +233,28 @@
             if($badgeEl.length) $badgeEl.text(totalCount);
         }
 
-        // --- SỰ KIỆN TRONG SIDEBAR ---
         $(document).on('click', '.remove-item', function() {
-            cart.splice($(this).data('index'), 1);
-            saveCart(); updateCartUI();
+            cart.splice($(this).data('index'), 1); saveCart(); updateCartUI();
         });
 
         $(document).on('click', '.plus', function() {
-            cart[$(this).data('index')].quantity++;
-            saveCart(); updateCartUI();
+            cart[$(this).data('index')].quantity++; saveCart(); updateCartUI();
         });
 
         $(document).on('click', '.minus', function() {
             var index = $(this).data('index');
-            if (cart[index].quantity > 1) {
-                cart[index].quantity--;
-                saveCart(); updateCartUI();
-            } else {
-                if(confirm('Xóa sản phẩm này?')) {
-                    cart.splice(index, 1);
-                    saveCart(); updateCartUI();
-                }
-            }
+            if (cart[index].quantity > 1) { cart[index].quantity--; saveCart(); updateCartUI(); } 
+            else { if(confirm('Xóa sản phẩm này?')) { cart.splice(index, 1); saveCart(); updateCartUI(); } }
         });
     }
 
     /* ==================================================================
-       2. HỆ THỐNG AUTH (ĐĂNG NHẬP) - CƠ CHẾ SAFE LOAD
+       3. HỆ THỐNG AUTH (ĐĂNG NHẬP)
        ================================================================== */
     function initAuthSystem() {
         const $modal = $('#auth-modal');
         let user = null;
-
-        // Try-catch để tránh lỗi nếu data user bị hỏng
-        try {
-            user = JSON.parse(localStorage.getItem('automize_user'));
-        } catch(e) {
-            localStorage.removeItem('automize_user');
-        }
+        try { user = JSON.parse(localStorage.getItem('automize_user')); } catch(e) {}
 
         if (!user) {
             $modal.addClass('forced').show().css('display', 'flex');
@@ -227,24 +282,20 @@
         $(document).on('click', '.auth-tab', function() {
             $('.auth-tab').removeClass('active');
             $(this).addClass('active');
-            const target = $(this).data('target');
             $('.auth-form').removeClass('active');
-            $('#' + target).addClass('active');
+            $('#' + $(this).data('target')).addClass('active');
         });
 
         $('#register-form').on('submit', function(e) {
             e.preventDefault();
-            // Demo logic
             alert("Đăng ký thành công! Mời đăng nhập.");
             $('.auth-tab[data-target="login-form"]').click();
         });
 
         $('#login-form').on('submit', function(e) {
             e.preventDefault();
-            // Bypass login nhanh để demo
             const mockUser = { name: $('#login-email').val().split('@')[0], email: $('#login-email').val() };
             localStorage.setItem('automize_user', JSON.stringify(mockUser));
-            
             $modal.removeClass('forced').fadeOut(300);
             $('body').removeClass('auth-locked');
             $('#user-display-name').text(mockUser.name);
@@ -254,7 +305,7 @@
     }
 
     /* ==================================================================
-       3. CÁC HIỆU ỨNG UI KHÁC
+       4. VISUAL EFFECTS
        ================================================================== */
     function initMobileMenu() {
         $(document).on('click', '.dropdown', function(e) {
@@ -274,6 +325,7 @@
     }
 
     function initCountdown() {
+        if($('.countdown').length === 0) return;
         setInterval(function() {
             $('.countdown').each(function() {
                 var s = parseInt($(this).find('.countdown-item').eq(3).text()) || 0;
@@ -303,16 +355,23 @@
         });
     }
 
-    function initNewsletterForm() { /* ... */ }
-    function initSearchBar() { /* ... */ }
+    function initNewsletterForm() {
+        $(document).on('click', '.newsletter button', function(e) {
+            e.preventDefault();
+            if ($('.newsletter input').val().includes('@')) {
+                showNotification('Thank you for subscribing!');
+                $('.newsletter input').val('');
+            } else showNotification('Invalid email address', 'error');
+        });
+    }
 
-    function showNotification(msg) {
+    function showNotification(msg, type='success') {
         $('.notification').remove();
-        $('body').append('<div class="notification" style="position:fixed; top:100px; right:20px; background:#66cc33; color:#fff; padding:15px; border-radius:5px; z-index:999999; box-shadow:0 5px 15px rgba(0,0,0,0.3); animation: slideInRight 0.3s ease;">'+msg+'</div>');
+        var color = type === 'success' ? '#66cc33' : '#ff4444';
+        $('body').append('<div class="notification" style="position:fixed; top:100px; right:20px; background:'+color+'; color:#fff; padding:15px; border-radius:5px; z-index:999999; box-shadow:0 5px 15px rgba(0,0,0,0.3); animation: slideInRight 0.3s ease;">'+msg+'</div>');
         setTimeout(function(){ $('.notification').fadeOut(500, function(){ $(this).remove(); }); }, 2000);
     }
 
-    // CSS Keyframes injection
     var style = document.createElement('style');
     style.innerHTML = `@keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
     document.head.appendChild(style);
