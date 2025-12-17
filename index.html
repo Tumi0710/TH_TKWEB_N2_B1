@@ -38,7 +38,7 @@
             <ul class="nav-menu">
                 <li class="active"><a href="#home">HOME</a></li>
                 <li class="dropdown">
-                    <a href="#shop">SHOP ▼</a>
+                    <a href="#shop">SHOP</a>
                     <div class="dropdown-content">
                         <a href="#">All Products</a>
                         <a href="#">New Arrivals</a>
@@ -47,7 +47,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="#product">PRODUCT ▼</a>
+                    <a href="#product">PRODUCT</a>
                     <div class="dropdown-content">
                         <a href="#">Tires & Wheels</a>
                         <a href="#">Brakes System</a>
@@ -56,7 +56,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="#pages">PAGES ▼</a>
+                    <a href="#pages">PAGES</a>
                     <div class="dropdown-content">
                         <a href="#">About Us</a>
                         <a href="#">Contact</a>
@@ -65,7 +65,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="#blog">BLOG ▼</a>
+                    <a href="#blog">BLOG</a>
                     <div class="dropdown-content">
                         <a href="#">Latest News</a>
                         <a href="#">Tips & Tricks</a>
@@ -114,16 +114,25 @@
 
     <!-- Product Promo -->
     <section class="products">
+        <div class="section-header">
+            <h2>FEATURED PRODUCTS</h2>
+        </div>
+    
         <div class="product-promo">
             <div class="promo-card dark">
-                <h3 class="yellow">MICHELIN TIRE</h3>
-                <p>Premium Performance</p>
-                <button class="promo-btn">Shop Now</button>
+                <div>
+                    <h3 class="yellow">MICHELIN<br>TIRE</h3>
+                    <p>Premium Performance</p>
+                    <button class="promo-btn">Shop Now</button>
+                </div>
             </div>
+    
             <div class="promo-card red">
-                <h3>BETTER BRAKES</h3>
-                <p>Best Sellers Brakes System</p>
-                <button class="promo-btn">Shop Now</button>
+                <div>
+                    <h3>BETTER<br>BRAKES</h3>
+                    <p>Best Sellers System</p>
+                    <button class="promo-btn">Shop Now</button>
+                </div>
             </div>
         </div>
 
@@ -197,7 +206,6 @@
             </div>
         </div>
 
-        <!-- Best Sellers -->
         <div class="best-sellers">
             <div class="section-header">
                 <h2>BEST SELLERS</h2>
@@ -210,71 +218,97 @@
             </div>
             
             <div class="product-grid">
+                
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
-                        <div style="font-size: 80px; color: #ddd;">🛞</div>
+                        <img src="https://sunwayautoparts.com/wp-content/uploads/2021/11/Car-Wheel.jpg" alt="Car Wheel">
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
-                        <div class="product-title">Phasellus commodo elit rutrum leo dignissim sagittis</div>
-                        <div class="product-rating">★★★★★ (0)</div>
+                        <h3 class="product-title">Phasellus commodo elit rutrum leo dignissim sagittis</h3>
+                        <div class="product-rating">★★★★★ <span style="color:#999; font-size:12px">(0)</span></div>
+                        
                         <div class="product-price">
                             <span class="price-current">$133.00</span>
                         </div>
-                        <button class="add-to-cart">Add to Cart</button>
+                        
+                        <div class="product-actions">
+                            <button class="btn-cart">ADD TO CART</button>
+                            <button class="btn-icon" title="Compare">📊</button>
+                            <button class="btn-icon" title="View">👁</button>
+                        </div>
                     </div>
                 </div>
-
+        
                 <div class="product-card">
                     <div class="product-image">
-                        <div class="product-badge">-25%</div>
+                        <div class="product-badge" style="position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; z-index: 2;">-25%</div>
                         <button class="wishlist-btn">♡</button>
-                        <div style="font-size: 80px; color: #ddd;">⚙️</div>
+                        <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-2-600x600.jpg" alt="Car Tire">
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
-                        <div class="product-title">Dorman Steel Wheel Compatible with Select Honda Models</div>
-                        <div class="product-rating">★★★★★ (4)</div>
+                        <h3 class="product-title">Dorman Steel Wheel Compatible with Select Honda Models</h3>
+                        <div class="product-rating">★★★★★ <span style="color:#999; font-size:12px">(4)</span></div>
+                        
                         <div class="product-price">
                             <span class="price-current">$120.00</span>
-                            <span class="price-old">$90.00</span>
+                            <span class="price-old" style="text-decoration: line-through; color: #999; font-size: 14px; margin-left: 5px;">$90.00</span>
                         </div>
-                        <button class="add-to-cart">Add to Cart</button>
+                        
+                        <div class="product-actions">
+                            <button class="btn-cart">ADD TO CART</button>
+                            <button class="btn-icon" title="Compare">📊</button>
+                            <button class="btn-icon" title="View">👁</button>
+                        </div>
                     </div>
                 </div>
-
+        
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
-                        <div style="font-size: 80px; color: #ddd;">🔩</div>
+                        <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/1-32-600x600.jpg" alt="Brake Caliper">
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
-                        <div class="product-title">Quisque in metus non nunc dapibus lobortis quis ligula</div>
-                        <div class="product-rating">★★★★★ (0)</div>
+                        <h3 class="product-title">Quisque in metus non nunc dapibus lobortis quis ligula</h3>
+                        <div class="product-rating">★★★★★ <span style="color:#999; font-size:12px">(0)</span></div>
+                        
                         <div class="product-price">
                             <span class="price-current">$19.00</span>
                         </div>
-                        <button class="add-to-cart">Add to Cart</button>
+                        
+                        <div class="product-actions">
+                            <button class="btn-cart">ADD TO CART</button>
+                            <button class="btn-icon" title="Compare">📊</button>
+                            <button class="btn-icon" title="View">👁</button>
+                        </div>
                     </div>
                 </div>
-
+        
                 <div class="product-card">
                     <div class="product-image">
                         <button class="wishlist-btn">♡</button>
-                        <div style="font-size: 80px; color: #f00;">🔧</div>
+                        <img src="https://automize.risingbamboo.com/wp-content/uploads/2021/08/2-26-600x600.jpg" alt="Steering Wheel">
                     </div>
                     <div class="product-info">
                         <div class="product-category">CAR AUDIO SYSTEMS</div>
-                        <div class="product-title">Aliquam consequat velit ac turpis sagittis tincidunt</div>
-                        <div class="product-rating">★★★★★ (0)</div>
+                        <h3 class="product-title">Aliquam consequat velit ac turpis sagittis tincidunt</h3>
+                        <div class="product-rating">★★★★★ <span style="color:#999; font-size:12px">(0)</span></div>
+                        
                         <div class="product-price">
                             <span class="price-current">$33.00</span>
                         </div>
-                        <button class="add-to-cart">Add to Cart</button>
+                        
+                        <div class="product-actions">
+                            <button class="btn-cart">ADD TO CART</button>
+                            <button class="btn-icon" title="Compare">📊</button>
+                            <button class="btn-icon" title="View">👁</button>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -286,87 +320,84 @@
         </div>
         
         <div class="flash-sale-grid">
-            <div class="flash-card new">
-                <div class="flash-badge">NEW</div>
+            
+            <div class="flash-card border-green">
+                <div class="flash-badge" style="background: #66cc33;">NEW</div>
+                
                 <div class="flash-image">
-                    <div style="font-size: 120px; color: #333;">🛞</div>
+                    <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-22.jpg" alt="Flash Sale Tire">
                 </div>
+                
                 <div class="flash-content">
                     <div class="flash-rating">★★★★★ (1)</div>
                     <div class="flash-title">Curabitur ultrices enim ut nunc commodo semper suscipit</div>
+                    
                     <div class="flash-prices">
                         <span class="flash-price">$100.00</span>
                         <span class="flash-old-price">$140.00</span>
-                        <span class="flash-discount">-29%</span>
+                        <span class="flash-discount">-28%</span>
                     </div>
-                    <div class="countdown" data-days="337" data-hours="7" data-mins="52" data-secs="16">
+                    
+                    <div class="countdown">
                         <div class="countdown-item">
-                            <span class="countdown-number">337</span>
-                            <span class="countdown-label">Days</span>
+                            <span class="countdown-number">317</span><span class="countdown-label">Days</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">07</span>
-                            <span class="countdown-label">Hours</span>
+                            <span class="countdown-number">08</span><span class="countdown-label">Hours</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">52</span>
-                            <span class="countdown-label">Mins</span>
+                            <span class="countdown-number">14</span><span class="countdown-label">Mins</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">16</span>
-                            <span class="countdown-label">Secs</span>
+                            <span class="countdown-number">18</span><span class="countdown-label">Secs</span>
                         </div>
                     </div>
+                    
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 53%"></div>
                     </div>
-                    <div class="stock-info">53% SOLD - AVAILABLE 7</div>
-                    <button class="add-to-cart" style="width: auto; padding: 12px 40px;">🛒 Add to Cart</button>
+                    <div class="stock-info">53% SOLD - AVAILABLE: 7</div>
                 </div>
             </div>
-
-            <div class="flash-card">
+    
+            <div class="flash-card border-yellow">
+                
                 <div class="flash-image">
-                    <div style="font-size: 120px; color: #c00;">⭕</div>
+                    <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-19.jpg" alt="Flash Sale Rim">
                 </div>
+                
                 <div class="flash-content">
-                    <div class="flash-rating">★★★★★ (0)</div>
+                    <div class="flash-rating" style="color: #ccc;">★★★★★ (0)</div>
                     <div class="flash-title">Curabitur id est vel nisi dictum rutrum consectetur vel</div>
+                    
                     <div class="flash-prices">
                         <span class="flash-price">$190.00</span>
                     </div>
-                    <div class="countdown" data-days="398" data-hours="7" data-mins="52" data-secs="16">
+                    
+                    <div class="countdown">
                         <div class="countdown-item">
-                            <span class="countdown-number">398</span>
-                            <span class="countdown-label">Days</span>
+                            <span class="countdown-number">378</span><span class="countdown-label">Days</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">07</span>
-                            <span class="countdown-label">Hours</span>
+                            <span class="countdown-number">08</span><span class="countdown-label">Hours</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">52</span>
-                            <span class="countdown-label">Mins</span>
+                            <span class="countdown-number">14</span><span class="countdown-label">Mins</span>
                         </div>
                         <div class="countdown-item">
-                            <span class="countdown-number">16</span>
-                            <span class="countdown-label">Secs</span>
+                            <span class="countdown-number">18</span><span class="countdown-label">Secs</span>
                         </div>
                     </div>
+                    
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 22%"></div>
                     </div>
-                    <div class="stock-info">22% SOLD - AVAILABLE 7</div>
-                    <div style="display: flex; gap: 15px;">
-                        <button class="add-to-cart" style="flex: 1;">🛒</button>
-                        <button class="add-to-cart" style="flex: 1;">📊</button>
-                        <button class="add-to-cart" style="flex: 1;">📋</button>
-                    </div>
+                    <div class="stock-info">22% SOLD - AVAILABLE: 7</div>
                 </div>
             </div>
+    
         </div>
     </section>
-
     <!-- Brands -->
     <section class="brands">
         <div class="section-header">
