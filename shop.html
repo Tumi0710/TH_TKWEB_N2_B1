@@ -19,18 +19,19 @@
                 <button>🔍</button>
             </div>
             
-            <div class="header-icons">
-                <div class="icon-btn">
-                    Account<br><small>Hello, Login</small>
-                </div>
-                <div class="icon-btn">
-                    ❤️
-                    <span class="badge">0</span>
-                </div>
-                <div class="icon-btn">
-                    🛒
-                    <span class="badge">0</span>
-                </div>
+           <div class="header-icons">
+               <div class="icon-btn" id="account-btn">
+        <span id="user-display-name">Account</span><br>
+        <small id="user-status">Hello, Login</small>
+    </div>
+    <div class="icon-btn wishlist-btn">
+        ❤️
+        <span class="badge">0</span>
+    </div>
+    <div class="icon-btn" id="header-cart-btn">
+        🛒
+        <span class="badge">0</span>
+    </div>
             </div>
         </div>
         
@@ -54,15 +55,7 @@
                 </a>
             </div>
         </li>
-        <li class="dropdown">
-            <a href="#product">PRODUCT</a>
-            <div class="dropdown-content">
-                <a href="#" data-category="tires">Tires & Wheels</a>
-                <a href="#" data-category="brakes">Brakes System</a>
-                <a href="#" data-category="suspension">Suspension</a>
-                <a href="#" data-category="audio">Audio System</a>
-            </div>
-        </li>
+        
     </ul>
 </nav>
     </header>
@@ -576,6 +569,75 @@
             </div>
         </div>
     </footer>
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>YOUR CART <span id="cart-total-count">(0)</span></h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        
+        <div class="cart-items-container">
+            <div class="cart-empty-state">
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+            <button class="view-cart-btn">VIEW CART</button>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-target="login-form">Login</button>
+                <button class="auth-tab" data-target="register-form">Register</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <h3>Welcome Back</h3>
+                <p>Login to manage your account</p>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="submit-btn">LOGIN</button>
+            </form>
+
+            <form id="register-form" class="auth-form">
+                <h3>Create Account</h3>
+                <p>Join us for exclusive offers</p>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="Create password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="submit-btn">REGISTER</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/main.js"></script>

@@ -1,15 +1,19 @@
 /**
  * AUTOMIZE - Main JavaScript File
- * Automotive E-commerce Website
+ * Phiên bản "Bulletproof": Chống lỗi cache, chống xung đột data
  */
 
 (function($) {
     'use strict';
 
-    // Document Ready
     $(document).ready(function() {
+        console.log("System Ready.");
+
+        // 1. Chạy Cart & Auth trước
+        initCartSystem(); 
+        initAuthSystem();
         
-        // Initialize all functions
+        // 2. Chạy các UI functions
         initMobileMenu();
         initProductTabs();
         initCountdown();
@@ -17,405 +21,300 @@
         initScrollEffects();
         initNewsletterForm();
         initSearchBar();
-        initCartFunctionality();
-        
     });
 
-    /**
-     * Mobile Menu Toggle
-     */
+    /* ==================================================================
+       1. HỆ THỐNG GIỎ HÀNG (AN TOÀN CAO)
+       ================================================================== */
+    function initCartSystem() {
+        const $cartSidebar = $('.cart-sidebar');
+        const $cartOverlay = $('.cart-overlay');
+        const $cartItemsContainer = $('.cart-items-container');
+        const $subtotalEl = $('#cart-subtotal');
+        const $cartTotalCountEl = $('#cart-total-count');
+        const $badgeEl = $('.header-icons .icon-btn').eq(2).find('.badge');
+
+        // --- CƠ CHẾ AN TOÀN (TRY-CATCH) ---
+        // Nếu data cũ bị lỗi, tự động reset để web không bị đơ
+        let cart = [];
+        try {
+            const storedCart = localStorage.getItem('automize_cart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+                if (!Array.isArray(cart)) throw new Error("Data corrupted");
+            }
+        } catch (e) {
+            console.warn("Giỏ hàng bị lỗi data cũ, đang reset...", e);
+            localStorage.removeItem('automize_cart');
+            cart = [];
+        }
+        
+        // Vẽ lại giao diện ngay khi load
+        updateCartUI();
+
+        // 1. Mở giỏ hàng
+        $(document).on('click', '#header-cart-btn', function(e) {
+            e.preventDefault();
+            $cartSidebar.addClass('open');
+            $cartOverlay.fadeIn(300);
+        });
+
+        // 2. Đóng giỏ hàng
+        $(document).on('click', '.close-cart, .cart-overlay', function() {
+            $cartSidebar.removeClass('open');
+            $cartOverlay.fadeOut(300);
+        });
+
+        // 3. Xử lý ADD TO CART (Bắt sự kiện toàn cục)
+        $(document).on('click', '.add-to-cart, .btn-cart', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Chặn xung đột
+            
+            var $btn = $(this);
+            var $card = $btn.closest('.product-card, .flash-card');
+
+            if ($card.length === 0) return;
+
+            // Lấy dữ liệu an toàn
+            var title = $card.find('.product-title, .flash-title').text().trim();
+            
+            // Xử lý giá tiền: Chỉ lấy số
+            var priceText = $card.find('.price-current, .flash-price').clone().children().remove().end().text();
+            var price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+            if(isNaN(price)) price = 0; // Giá mặc định nếu lỗi
+
+            var image = $card.find('img').attr('src');
+
+            // Hiệu ứng nút
+            var originalText = $btn.text();
+            $btn.text('Adding...');
+            $btn.prop('disabled', true);
+
+            // Thêm vào mảng
+            var existingItem = cart.find(item => item.title === title);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ title, price, image, quantity: 1 });
+            }
+
+            // Lưu và vẽ lại
+            saveCart();
+            updateCartUI();
+            
+            // Hiện Sidebar
+            $cartSidebar.addClass('open');
+            $cartOverlay.fadeIn(300);
+            showNotification('Đã thêm vào giỏ hàng!');
+
+            // Trả lại nút
+            setTimeout(function() {
+                $btn.text(originalText);
+                $btn.prop('disabled', false);
+            }, 500);
+        });
+
+        // --- CÁC HÀM CON ---
+        function saveCart() {
+            localStorage.setItem('automize_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            $cartItemsContainer.empty();
+            let totalAmount = 0;
+            let totalCount = 0;
+
+            if (cart.length === 0) {
+                $cartItemsContainer.html(`
+                    <div class="cart-empty-state" style="text-align:center; padding:50px 0; color:#888;">
+                        <i class="fa fa-shopping-cart" style="font-size:30px; margin-bottom:10px; display:block;"></i>
+                        Giỏ hàng trống
+                    </div>
+                `);
+            } else {
+                cart.forEach((item, index) => {
+                    totalAmount += item.price * item.quantity;
+                    totalCount += item.quantity;
+
+                    var itemHTML = `
+                        <div class="cart-item">
+                            <div class="cart-item-img"><img src="${item.image}"></div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.title}</div>
+                                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                <div class="cart-item-actions">
+                                    <div class="qty-control">
+                                        <button class="qty-btn minus" data-index="${index}">-</button>
+                                        <span class="qty-val">${item.quantity}</span>
+                                        <button class="qty-btn plus" data-index="${index}">+</button>
+                                    </div>
+                                    <button class="remove-item" data-index="${index}"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $cartItemsContainer.append(itemHTML);
+                });
+            }
+
+            $subtotalEl.text('$' + totalAmount.toFixed(2));
+            $cartTotalCountEl.text(`(${totalCount})`);
+            if($badgeEl.length) $badgeEl.text(totalCount);
+        }
+
+        // --- SỰ KIỆN TRONG SIDEBAR ---
+        $(document).on('click', '.remove-item', function() {
+            cart.splice($(this).data('index'), 1);
+            saveCart(); updateCartUI();
+        });
+
+        $(document).on('click', '.plus', function() {
+            cart[$(this).data('index')].quantity++;
+            saveCart(); updateCartUI();
+        });
+
+        $(document).on('click', '.minus', function() {
+            var index = $(this).data('index');
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+                saveCart(); updateCartUI();
+            } else {
+                if(confirm('Xóa sản phẩm này?')) {
+                    cart.splice(index, 1);
+                    saveCart(); updateCartUI();
+                }
+            }
+        });
+    }
+
+    /* ==================================================================
+       2. HỆ THỐNG AUTH (ĐĂNG NHẬP) - CƠ CHẾ SAFE LOAD
+       ================================================================== */
+    function initAuthSystem() {
+        const $modal = $('#auth-modal');
+        let user = null;
+
+        // Try-catch để tránh lỗi nếu data user bị hỏng
+        try {
+            user = JSON.parse(localStorage.getItem('automize_user'));
+        } catch(e) {
+            localStorage.removeItem('automize_user');
+        }
+
+        if (!user) {
+            $modal.addClass('forced').show().css('display', 'flex');
+            $('body').addClass('auth-locked');
+        } else {
+            $('#user-display-name').text(user.name);
+            $('#user-status').text('Logout').css('color', '#ff4444');
+        }
+
+        $(document).on('click', '#account-btn', function() {
+            if (localStorage.getItem('automize_user')) {
+                if(confirm('Đăng xuất?')) {
+                    localStorage.removeItem('automize_user');
+                    location.reload(); 
+                }
+            } else {
+                $modal.removeClass('forced').fadeIn(300).css('display', 'flex');
+            }
+        });
+
+        $(document).on('click', '.modal-close', function() {
+            if (!$modal.hasClass('forced')) $modal.fadeOut(300);
+        });
+
+        $(document).on('click', '.auth-tab', function() {
+            $('.auth-tab').removeClass('active');
+            $(this).addClass('active');
+            const target = $(this).data('target');
+            $('.auth-form').removeClass('active');
+            $('#' + target).addClass('active');
+        });
+
+        $('#register-form').on('submit', function(e) {
+            e.preventDefault();
+            // Demo logic
+            alert("Đăng ký thành công! Mời đăng nhập.");
+            $('.auth-tab[data-target="login-form"]').click();
+        });
+
+        $('#login-form').on('submit', function(e) {
+            e.preventDefault();
+            // Bypass login nhanh để demo
+            const mockUser = { name: $('#login-email').val().split('@')[0], email: $('#login-email').val() };
+            localStorage.setItem('automize_user', JSON.stringify(mockUser));
+            
+            $modal.removeClass('forced').fadeOut(300);
+            $('body').removeClass('auth-locked');
+            $('#user-display-name').text(mockUser.name);
+            $('#user-status').text('Logout').css('color', '#ff4444');
+            showNotification('Đăng nhập thành công!');
+        });
+    }
+
+    /* ==================================================================
+       3. CÁC HIỆU ỨNG UI KHÁC
+       ================================================================== */
     function initMobileMenu() {
-        // Dropdown toggle for mobile
-        $('.dropdown').on('click', function(e) {
+        $(document).on('click', '.dropdown', function(e) {
             if ($(window).width() <= 768) {
                 e.preventDefault();
                 $(this).find('.dropdown-content').slideToggle(300);
-                $(this).toggleClass('active');
-            }
-        });
-
-        // Close dropdown when clicking outside
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('.dropdown').length) {
-                $('.dropdown-content').slideUp(300);
-                $('.dropdown').removeClass('active');
             }
         });
     }
-
-    /**
-     * Product Tabs Switching
-     */
+    
     function initProductTabs() {
-        $('.product-tabs button').on('click', function() {
-            // Remove active class from all buttons
+        $(document).on('click', '.product-tabs button', function() {
             $('.product-tabs button').removeClass('active');
-            
-            // Add active class to clicked button
             $(this).addClass('active');
-            
-            // Get tab data
-            var tabName = $(this).data('tab');
-            
-            // Here you can add AJAX call to load different products
-            // or filter existing products based on tab
-            console.log('Tab switched to: ' + tabName);
-            
-            // Add fade effect to product grid
-            $('.product-grid').fadeOut(200, function() {
-                $(this).fadeIn(200);
-            });
+            $('.product-grid').hide().fadeIn(300);
         });
     }
 
-    /**
-     * Countdown Timer
-     */
     function initCountdown() {
-        // Update countdown every second
         setInterval(function() {
             $('.countdown').each(function() {
-                var $countdown = $(this);
-                
-                // Get countdown items
-                var $days = $countdown.find('.countdown-item').eq(0).find('.countdown-number');
-                var $hours = $countdown.find('.countdown-item').eq(1).find('.countdown-number');
-                var $mins = $countdown.find('.countdown-item').eq(2).find('.countdown-number');
-                var $secs = $countdown.find('.countdown-item').eq(3).find('.countdown-number');
-                
-                // Get current values
-                var days = parseInt($days.text());
-                var hours = parseInt($hours.text());
-                var mins = parseInt($mins.text());
-                var secs = parseInt($secs.text());
-                
-                // Countdown logic
-                if (secs > 0) {
-                    secs--;
-                } else if (mins > 0) {
-                    mins--;
-                    secs = 59;
-                } else if (hours > 0) {
-                    hours--;
-                    mins = 59;
-                    secs = 59;
-                } else if (days > 0) {
-                    days--;
-                    hours = 23;
-                    mins = 59;
-                    secs = 59;
-                }
-                
-                // Update display with leading zeros
-                $days.text(String(days).padStart(2, '0'));
-                $hours.text(String(hours).padStart(2, '0'));
-                $mins.text(String(mins).padStart(2, '0'));
-                $secs.text(String(secs).padStart(2, '0'));
+                var s = parseInt($(this).find('.countdown-item').eq(3).text()) || 0;
+                if(s>0) s--; else s=59;
+                $(this).find('.countdown-item').eq(3).find('.countdown-number').text(String(s).padStart(2,'0'));
             });
         }, 1000);
     }
 
-    /**
-     * Wishlist Toggle
-     */
     function initWishlist() {
-        $('.wishlist-btn').on('click', function(e) {
+        $(document).on('click', '.wishlist-btn', function(e) {
             e.preventDefault();
-            
-            var $btn = $(this);
-            
-            // Toggle heart icon
-            if ($btn.css('color') === 'rgb(255, 0, 0)' || $btn.css('color') === 'red') {
-                $btn.css('color', '#999');
-                $btn.text('♡');
-                
-                // Update badge
-                updateWishlistBadge(-1);
-            } else {
-                $btn.css('color', 'red');
-                $btn.text('❤');
-                
-                // Update badge
-                updateWishlistBadge(1);
-                
-                // Show notification
+            $(this).toggleClass('active');
+            if($(this).hasClass('active')) {
+                $(this).css('color', 'red').text('❤');
                 showNotification('Added to wishlist!');
+            } else {
+                $(this).css('color', '#999').text('♡');
             }
         });
     }
 
-    /**
-     * Update Wishlist Badge
-     */
-    function updateWishlistBadge(change) {
-        var $badge = $('.header-icons .icon-btn').eq(1).find('.badge');
-        var currentCount = parseInt($badge.text()) || 0;
-        var newCount = Math.max(0, currentCount + change);
-        $badge.text(newCount);
-    }
-
-    /**
-     * Scroll Effects
-     */
     function initScrollEffects() {
-        // Header background on scroll
         $(window).on('scroll', function() {
-            var scrollTop = $(this).scrollTop();
-            
-            if (scrollTop > 100) {
-                $('header').addClass('scrolled');
-            } else {
-                $('header').removeClass('scrolled');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        $('a[href^="#"]').on('click', function(e) {
-            var target = $(this.hash);
-            
-            if (target.length) {
-                e.preventDefault();
-                
-                $('html, body').animate({
-                    scrollTop: target.offset().top - 120
-                }, 800);
-            }
-        });
-
-        // Animate elements on scroll
-        $(window).on('scroll', function() {
-            $('.feature-card, .category-card, .product-card, .brand-card').each(function() {
-                var elementTop = $(this).offset().top;
-                var windowBottom = $(window).scrollTop() + $(window).height();
-                
-                if (elementTop < windowBottom - 50) {
-                    $(this).addClass('animated');
-                }
-            });
+            if ($(this).scrollTop() > 50) $('header').addClass('scrolled');
+            else $('header').removeClass('scrolled');
         });
     }
 
-    /**
-     * Newsletter Form
-     */
-    function initNewsletterForm() {
-        $('.newsletter button').on('click', function(e) {
-            e.preventDefault();
-            
-            var $input = $('.newsletter input');
-            var email = $input.val().trim();
-            
-            // Basic email validation
-            if (validateEmail(email)) {
-                // Here you would normally send to your backend
-                showNotification('Thank you for subscribing!');
-                $input.val('');
-            } else {
-                showNotification('Please enter a valid email address', 'error');
-            }
-        });
-    }
+    function initNewsletterForm() { /* ... */ }
+    function initSearchBar() { /* ... */ }
 
-    /**
-     * Search Bar Functionality
-     */
-    function initSearchBar() {
-        $('.search-bar button').on('click', function(e) {
-            e.preventDefault();
-            
-            var query = $('.search-bar input').val().trim();
-            
-            if (query.length > 0) {
-                console.log('Searching for: ' + query);
-                // Here you would implement your search functionality
-                showNotification('Searching for: ' + query);
-            } else {
-                showNotification('Please enter a search term', 'error');
-            }
-        });
-
-        // Search on Enter key
-        $('.search-bar input').on('keypress', function(e) {
-            if (e.which === 13) {
-                e.preventDefault();
-                $('.search-bar button').click();
-            }
-        });
-    }
-
-    /**
-     * Cart Functionality
-     */
-    function initCartFunctionality() {
-        $('.add-to-cart').on('click', function(e) {
-            e.preventDefault();
-            
-            var $btn = $(this);
-            var $card = $btn.closest('.product-card, .flash-card');
-            var productTitle = $card.find('.product-title, .flash-title').text();
-            
-            // Add animation
-            $btn.text('Adding...').prop('disabled', true);
-            
-            setTimeout(function() {
-                // Update cart badge
-                var $badge = $('.header-icons .icon-btn').eq(2).find('.badge');
-                var currentCount = parseInt($badge.text()) || 0;
-                $badge.text(currentCount + 1);
-                
-                // Reset button
-                $btn.text('Add to Cart').prop('disabled', false);
-                
-                // Show notification
-                showNotification('Product added to cart!');
-                
-                console.log('Added to cart: ' + productTitle);
-            }, 500);
-        });
-    }
-
-    /**
-     * Email Validation
-     */
-    function validateEmail(email) {
-        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    /**
-     * Show Notification
-     */
-    function showNotification(message, type = 'success') {
-        // Remove existing notifications
+    function showNotification(msg) {
         $('.notification').remove();
-        
-        // Create notification element
-        var bgColor = type === 'success' ? '#00ff00' : '#ff0000';
-        var textColor = '#000';
-        
-        var $notification = $('<div class="notification"></div>')
-            .text(message)
-            .css({
-                'position': 'fixed',
-                'top': '100px',
-                'right': '20px',
-                'background': bgColor,
-                'color': textColor,
-                'padding': '15px 25px',
-                'border-radius': '8px',
-                'font-weight': '600',
-                'z-index': '9999',
-                'animation': 'slideInRight 0.3s ease',
-                'box-shadow': '0 4px 12px rgba(0,0,0,0.3)'
-            });
-        
-        // Add to body
-        $('body').append($notification);
-        
-        // Auto remove after 3 seconds
-        setTimeout(function() {
-            $notification.fadeOut(300, function() {
-                $(this).remove();
-            });
-        }, 3000);
+        $('body').append('<div class="notification" style="position:fixed; top:100px; right:20px; background:#66cc33; color:#fff; padding:15px; border-radius:5px; z-index:999999; box-shadow:0 5px 15px rgba(0,0,0,0.3); animation: slideInRight 0.3s ease;">'+msg+'</div>');
+        setTimeout(function(){ $('.notification').fadeOut(500, function(){ $(this).remove(); }); }, 2000);
     }
 
-    /**
-     * Category Card Click
-     */
-    $('.category-card').on('click', function() {
-        var category = $(this).find('h4').text();
-        console.log('Category clicked: ' + category);
-        showNotification('Loading ' + category + '...');
-    });
-
-    /**
-     * Brand Card Click
-     */
-    $('.brand-card').on('click', function() {
-        var brand = $(this).text();
-        console.log('Brand clicked: ' + brand);
-        showNotification('Loading ' + brand + ' products...');
-    });
-
-    /**
-     * Promo Button Click
-     */
-    $('.promo-btn').on('click', function() {
-        var promoTitle = $(this).closest('.promo-card').find('h3').text();
-        console.log('Promo clicked: ' + promoTitle);
-        showNotification('Loading ' + promoTitle + '...');
-    });
-
-    /**
-     * Window Resize Handler
-     */
-    $(window).on('resize', function() {
-        // Close mobile menu on resize to desktop
-        if ($(window).width() > 768) {
-            $('.dropdown-content').hide();
-            $('.dropdown').removeClass('active');
-        }
-    });
-
-    /**
-     * Lazy Loading Images (Optional)
-     */
-    function lazyLoadImages() {
-        var lazyImages = document.querySelectorAll('img[data-src]');
-        
-        var imageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    var img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        lazyImages.forEach(function(img) {
-            imageObserver.observe(img);
-        });
-    }
-
-    // Call lazy loading if supported
-    if ('IntersectionObserver' in window) {
-        lazyLoadImages();
-    }
-
-    /**
-     * Add CSS Animation Keyframes
-     */
+    // CSS Keyframes injection
     var style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .animated {
-            animation: fadeInUp 0.6s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    `;
+    style.innerHTML = `@keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
     document.head.appendChild(style);
 
 })(jQuery);

@@ -19,14 +19,15 @@
             </div>
             
             <div class="header-icons">
-                <div class="icon-btn">
-                    Account<br><small>Hello, Login</small>
+                <div class="icon-btn" id="account-btn">
+                    <span id="user-display-name">Account</span><br>
+                    <small id="user-status">Hello, Login</small>
                 </div>
                 <div class="icon-btn">
                     ❤️
                     <span class="badge">0</span>
                 </div>
-                <div class="icon-btn">
+                <div class="icon-btn" id="header-cart-btn">
                     🛒
                     <span class="badge">0</span>
                 </div>
@@ -38,10 +39,6 @@
                 <li class="active"><a href="#home">HOME</a></li>
                 <li class="dropdown">
                     <a href="shop.html">SHOP</a>
-                </li>
-                <li class="dropdown">
-                    <a href="#product">PRODUCT</a>
-
                 </li>
             </ul>
         </nav>
@@ -323,11 +320,12 @@
                         <div class="progress-fill" style="width: 53%"></div>
                     </div>
                     <div class="stock-info">53% SOLD - AVAILABLE: 7</div>
+                    
+                    <button class="add-to-cart" style="width:100%; margin-top:15px; padding:10px; background:#000; color:#fff; border:none; cursor:pointer; font-weight:bold;">ADD TO CART</button>
                 </div>
             </div>
     
             <div class="flash-card border-yellow">
-                
                 <div class="flash-image">
                     <img src="https://automize.risingbamboo.com/wp-content/uploads/2022/10/2-19.jpg" alt="Flash Sale Rim">
                 </div>
@@ -359,6 +357,7 @@
                         <div class="progress-fill" style="width: 22%"></div>
                     </div>
                     <div class="stock-info">22% SOLD - AVAILABLE: 7</div>
+                     <button class="add-to-cart" style="width:100%; margin-top:15px; padding:10px; background:#000; color:#fff; border:none; cursor:pointer; font-weight:bold;">ADD TO CART</button>
                 </div>
             </div>
     
@@ -370,42 +369,18 @@
             <h2>OUR PARTNERS</h2>
         </div>
         <div class="brands-grid">
-            <div class="brand-card">
-                <img src="https://cdn.worldvectorlogo.com/logos/bentley.svg" alt="Bentley">
-            </div>
-            <div class="brand-card">
-                <img src="https://cdn.worldvectorlogo.com/logos/jaguar-cars.svg" alt="Jaguar">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg" alt="Honda">
-            </div>
-            <div class="brand-card">
-                <img src="https://www.carlogos.org/car-logos/jeep-logo-1993.png" alt="Jeep">
-            </div>
-            <div class="brand-card">
-                <img src="https://www.carlogos.org/car-logos/oldsmobile-logo.png" alt="oldsmobile">
-            </div>
-            <div class="brand-card">
-                <img src="https://www.carlogos.org/car-logos/tesla-logo.png" alt="tesla">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg" alt="Toyota">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" alt="Ford">
-            </div>
-            <div class="brand-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg" alt="Audi">
-            </div>
-            <div class="brand-card">
-                <img src="https://www.carlogos.org/car-logos/corvette-logo.png" alt="Chevrolet">
-            </div>
+            <div class="brand-card"><img src="https://cdn.worldvectorlogo.com/logos/bentley.svg" alt="Bentley"></div>
+            <div class="brand-card"><img src="https://cdn.worldvectorlogo.com/logos/jaguar-cars.svg" alt="Jaguar"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg" alt="Honda"></div>
+            <div class="brand-card"><img src="https://www.carlogos.org/car-logos/jeep-logo-1993.png" alt="Jeep"></div>
+            <div class="brand-card"><img src="https://www.carlogos.org/car-logos/oldsmobile-logo.png" alt="oldsmobile"></div>
+            <div class="brand-card"><img src="https://www.carlogos.org/car-logos/tesla-logo.png" alt="tesla"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg" alt="Toyota"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" alt="Ford"></div>
+            <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg" alt="Audi"></div>
+            <div class="brand-card"><img src="https://www.carlogos.org/car-logos/corvette-logo.png" alt="Chevrolet"></div>
         </div>
     </section>
 
@@ -414,7 +389,7 @@
             <div class="location-text">
                 <h3>OUR LOCATIONS</h3>
                 <h2>Car Washing and Care Points</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
             </div>
             <div class="location-image">
                 <img src="https://www.detailingdevils.com/uploads/blogs/Car-Wash-Safety-Tips.webp" alt="Location Image">
@@ -561,8 +536,88 @@
         </div>
     </footer>
 
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>YOUR CART <span id="cart-total-count">(0)</span></h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        
+        <div class="cart-items-container">
+            <div class="cart-empty-state">
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+            <button class="view-cart-btn">VIEW CART</button>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-target="login-form">Login</button>
+                <button class="auth-tab" data-target="register-form">Register</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <h3>Welcome Back</h3>
+                <p>Login to manage your account</p>
+                
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">LOGIN</button>
+                <div class="form-footer">
+                    <a href="#">Forgot Password?</a>
+                </div>
+            </form>
+
+            <form id="register-form" class="auth-form">
+                <h3>Create Account</h3>
+                <p>Join us for exclusive offers</p>
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" placeholder="Your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="Create password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" placeholder="Confirm password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">REGISTER</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
     <script src="js/main.js"></script>
 </body>
 </html>
